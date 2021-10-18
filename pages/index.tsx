@@ -3,6 +3,7 @@ import type { NextPage } from 'next';
 import Image from 'next/image';
 import FormSteps from '../components/job-application/FormSteps';
 import Input from '../components/shared/Input';
+import Select from '../components/shared/Select';
 
 const Home: NextPage = () => {
   const steps = [
@@ -55,6 +56,21 @@ const Home: NextPage = () => {
               name="firstName"
               label="First Name"
               placeholder="First Name"
+            />
+          </div>
+          <div className="w-1/2">
+            <Select
+              name="firstName"
+              label="First Name"
+              placeholder="First Name"
+              options={[
+                { name: 'Wade Cooper', value: 'stromg' },
+                { name: 'Arlene Mccoy', value: 'stromg' },
+                { name: 'Devon Webb', value: 'stromg' },
+                { name: 'Tom Cook', value: 'stromg' },
+                { name: 'Tanya Fox', value: 'stromg' },
+                { name: 'Hellen Schmidt', value: 'stromg' },
+              ]}
             />
           </div>
         </div>

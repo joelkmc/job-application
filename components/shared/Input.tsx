@@ -46,7 +46,7 @@ const Input: React.FC<InputProps> = ({
           id={name}
           className={`shadow-sm block w-full  border outline-none transition-all sm:text-sm rounded-md p-2 ${
             isError
-              ? 'border-red-500 text-red-700 placeholder-red-500 focus:outline-none focus:ring-red-500 focus:border-red-500 pr-10'
+              ? 'border-red-500 text-red-600 placeholder-red-500 focus:outline-none focus:ring-red-500 focus:border-red-500 pr-10'
               : 'focus:ring-kmc-primary focus:border-kmc-primary border-gray-300 pr-2'
           }
           ${leadingIcon ? 'pl-10' : 'pl-2'}
