@@ -1,6 +1,8 @@
+import { MailIcon } from '@heroicons/react/solid';
 import type { NextPage } from 'next';
-import { CheckIcon } from '@heroicons/react/solid';
 import Image from 'next/image';
+import FormSteps from '../components/job-application/FormSteps';
+import Input from '../components/shared/Input';
 
 const Home: NextPage = () => {
   const steps = [
@@ -24,50 +26,38 @@ const Home: NextPage = () => {
         </div>
       </header>
 
-      <div className="w-full max-w-6xl h-full mx-auto mt-9 mb-12">
-        <nav aria-label="Progress">
-          <ol
-            role="list"
-            className="space-y-4 md:flex md:space-y-0 md:space-x-8"
-          >
-            {steps.map((step) => (
-              <li key={step.name} className="md:flex-1">
-                {step.status === 'complete' ? (
-                  <a
-                    href={step.href}
-                    className="group pl-4 py-2 flex flex-col border-l-4 border-kmc-primary hover:border-kmc-primary md:pl-0 md:pt-4 md:pb-0 md:border-l-0 md:border-t-4"
-                  >
-                    <span className=" text-kmc-primary font-proxiSemiBold tracking-wide uppercase group-hover:text-kmc-primary">
-                      Step {step.id}
-                    </span>
-                    <span className="text-sm font-medium">{step.name}</span>
-                  </a>
-                ) : step.status === 'current' ? (
-                  <a
-                    href={step.href}
-                    className="pl-4 py-2 flex flex-col border-l-4 border-kmc-primary md:pl-0 md:pt-4 md:pb-0 md:border-l-0 md:border-t-4"
-                    aria-current="step"
-                  >
-                    <span className=" text-kmc-primary font-semibold tracking-wide uppercase">
-                      Step {step.id}
-                    </span>
-                    <span className="font-medium">{step.name}</span>
-                  </a>
-                ) : (
-                  <a
-                    href={step.href}
-                    className="group pl-4 py-2 flex flex-col border-l-4 border-gray-200 hover:border-gray-300 md:pl-0 md:pt-4 md:pb-0 md:border-l-0 md:border-t-4"
-                  >
-                    <span className=" text-gray-500 font-semibold tracking-wide uppercase group-hover:text-gray-700">
-                      Step {step.id}
-                    </span>
-                    <span className="font-medium">{step.name}</span>
-                  </a>
-                )}
-              </li>
-            ))}
-          </ol>
-        </nav>
+      <div className="w-full max-w-5xl h-full mx-auto mt-9 mb-12">
+        <div className="md:w-2/3 mx-auto">
+          <FormSteps steps={steps} />
+        </div>
+
+        <div className="w-full mt-10">
+          <p className="text-2xl font-proxiExtraBold text-gray-800">
+            Hi, Tell us about yourself.
+          </p>
+          <p className="text-sm">
+            KMC’s screening team will evaluate your application based on the
+            information you provide here.
+          </p>
+        </div>
+
+        <div className="flex gap-3">
+          <div className="w-1/2">
+            <Input
+              name="firstName"
+              label="First Name"
+              placeholder="First Name"
+              leadingIcon={<MailIcon className="h-5 w-5" aria-hidden="true" />}
+            />
+          </div>
+          <div className="w-1/2">
+            <Input
+              name="firstName"
+              label="First Name"
+              placeholder="First Name"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
