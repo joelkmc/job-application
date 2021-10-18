@@ -3,6 +3,7 @@ import type { NextPage } from 'next';
 import Image from 'next/image';
 import FormSteps from '../components/job-application/FormSteps';
 import Input from '../components/shared/Input';
+import Radio from '../components/shared/Radio';
 import Select from '../components/shared/Select';
 
 const Home: NextPage = () => {
@@ -42,7 +43,7 @@ const Home: NextPage = () => {
           </p>
         </div>
 
-        <div className="flex gap-3">
+        <div className="flex gap-3 flex-wrap">
           <div className="w-1/2">
             <Input
               name="firstName"
@@ -70,6 +71,24 @@ const Home: NextPage = () => {
                 { name: 'Tom Cook', value: 'stromg' },
                 { name: 'Tanya Fox', value: 'stromg' },
                 { name: 'Hellen Schmidt', value: 'stromg' },
+              ]}
+            />
+          </div>
+          <div className="w-1/2">
+            <Radio
+              name="firstName"
+              label="First Name"
+              options={[
+                {
+                  name: 'Yes',
+                  value: true,
+                  description: 'Yes I worked with',
+                },
+                {
+                  name: 'No',
+                  value: false,
+                  description: 'No I worked with',
+                },
               ]}
             />
           </div>
