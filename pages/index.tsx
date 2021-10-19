@@ -9,7 +9,7 @@ import StepThree from '../components/job-application/StepThree';
 import StepTwo from '../components/job-application/StepTwo';
 
 const Home: NextPage = () => {
-  const [currentStep, setCurrentStep] = useState(1);
+  const [currentStep, setCurrentStep] = useState(2);
 
   const handleStep = (action: 'next' | 'previous') => {
     const stepFunction = {

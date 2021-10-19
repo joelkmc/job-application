@@ -6,12 +6,12 @@ export type IApplicantInformationForm = {
   lastName: string;
   personalPhone: string;
   personalEmail: string;
-  expectedSalary: number;
+  expectedSalary: number | null;
   resume: string;
   linkedInProfile?: string | null;
-  sourceOfHire: number;
+  sourceOfHire: number | null;
   sourceOfHire_others?: string | null;
-  deviceUsed: number;
+  deviceUsed: number | null;
 };
 
 export type IConflictOfInterestForm = {
@@ -22,6 +22,13 @@ export type IConflictOfInterestForm = {
   dateWorkedWithKMCClients: string | null;
   locationWorkedWithClients: string;
   boundByAgreement: boolean | null;
+};
+
+export type ILegalStatusForm = {
+  filipinoCitizen: boolean | null;
+  workPermitExpiryDate: boolean | null;
+  isConvicted: boolean | null;
+  consent: boolean | null;
 };
 
 export enum DeviceEnum {

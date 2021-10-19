@@ -1,4 +1,4 @@
-import { HTMLProps, useEffect, useState } from 'react';
+import { HTMLProps, useState } from 'react';
 import { RadioGroup } from '@headlessui/react';
 import { useFormContext } from 'react-hook-form';
 
