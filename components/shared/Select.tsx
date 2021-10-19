@@ -1,4 +1,4 @@
-import { Fragment, HTMLProps, useEffect, useState } from 'react';
+import { Fragment, HTMLProps, useState } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
 import { useFormContext } from 'react-hook-form';
@@ -12,7 +12,6 @@ interface SelectProps extends HTMLProps<HTMLDivElement> {
   }[];
 }
 
-// TODO:
 const Select: React.FC<SelectProps> = ({ label, name, options, ...rest }) => {
   const [selected, setSelected] = useState(options[0]);
 

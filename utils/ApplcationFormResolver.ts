@@ -14,6 +14,16 @@ export type IApplicantInformationForm = {
   deviceUsed: number;
 };
 
+export type IConflictOfInterestForm = {
+  workWithKMC: boolean | null;
+  dateWorkedWithKMC: string | null;
+  locationWorkedWithKMC: string | null;
+  workedWithKMCClients: boolean | null;
+  dateWorkedWithKMCClients: string | null;
+  locationWorkedWithClients: string;
+  boundByAgreement: boolean | null;
+};
+
 export enum DeviceEnum {
   MOBILE = 0,
   LAPTOP = 1,
@@ -68,34 +78,54 @@ export const ApplicantInformationFormSchema = yup.object({
 });
 
 export const ConflictOfInterestFormSchema = yup.object({
-  workWithKMCBefore: yup.boolean().required('Please choose one option!'),
-  dateWorkedWithKMC: yup.date().when('workWithKMCBefore', {
-    is: true,
-    then: yup.date().required('Please enter a valid date!'),
-    otherwise: yup.date().optional(),
-  }),
-  locationWorkedWithKMC: yup.date().when('workWithKMCBefore', {
-    is: true,
-    then: yup.date().required('Please enter a location!'),
-    otherwise: yup.date().optional(),
-  }),
-  workedWithAnyKMCClientsOrTenants: yup
-    .boolean()
-    .required('Please choose one option!'),
-  dateWorkedWithAnyKMCClientsOrTenants: yup.date().when('workWithKMCBefore', {
-    is: true,
-    then: yup.date().required('Please enter a valid date!'),
-    otherwise: yup.date().optional(),
-  }),
-  locationWorkedWithAnyKMCClientsOrTenants: yup
-    .string()
-    .when('workWithKMCBefore', {
-      is: true,
-      then: yup.string().required('Please enter a location!'),
-      otherwise: yup.string().optional(),
+  workWithKMC: yup.boolean().nullable().required('Please choose one option!'),
+  dateWorkedWithKMC: yup
+    .date()
+    .nullable()
+    .typeError('Invalid date!')
+    .when('workWithKMC', {
+      is: (val: boolean) => val === true,
+      then: yup
+        .date()
+        .typeError('Invalid date!')
+        .required('Please enter a location!'),
+      otherwise: yup.date().notRequired(),
     }),
-  boundByAnAgreementFromPreviousEmployer: yup
+  locationWorkedWithKMC: yup
+    .string()
+    .nullable()
+    .when('workWithKMC', {
+      is: (val: boolean) => val === true,
+      then: yup.string().required('Please enter a location!'),
+      otherwise: yup.string().notRequired(),
+    }),
+  workedWithKMCClients: yup
     .boolean()
+    .nullable()
+    .required('Please choose one option!'),
+  dateWorkedWithKMCClients: yup
+    .date()
+    .nullable()
+    .typeError('Invalid date!')
+    .when('workWithKMC', {
+      is: (val: boolean) => val === true,
+      then: yup
+        .date()
+        .typeError('Invalid date!')
+        .required('Please enter a location!'),
+      otherwise: yup.date().notRequired(),
+    }),
+  locationWorkedWithClients: yup
+    .string()
+    .nullable()
+    .when('workedWithKMCClients', {
+      is: (val: boolean) => val === true,
+      then: yup.string().required('Please enter a location!'),
+      otherwise: yup.string().notRequired(),
+    }),
+  boundByAgreement: yup
+    .boolean()
+    .nullable()
     .required('Please choose one option!'),
 });
 

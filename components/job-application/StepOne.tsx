@@ -42,7 +42,7 @@ const StepOne: React.FC<StepOneProps> = ({ handleStep }) => {
   return (
     <>
       <div className="mt-10">
-        <p className="text-2xl lg:text-3xl font-proxiSemiBold text-gray-800">
+        <p className="text-xl lg:text-2xl font-proxiSemiBold text-gray-800">
           Hi, Tell us about yourself.
         </p>
         <p className="text-sm text-gray-700">

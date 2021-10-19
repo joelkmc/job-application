@@ -9,7 +9,7 @@ import StepThree from '../components/job-application/StepThree';
 import StepTwo from '../components/job-application/StepTwo';
 
 const Home: NextPage = () => {
-  const [currentStep, setCurrentStep] = useState(0);
+  const [currentStep, setCurrentStep] = useState(1);
 
   const handleStep = (action: 'next' | 'previous') => {
     const stepFunction = {
@@ -65,8 +65,6 @@ const Home: NextPage = () => {
 
         <div className="w-full max-w-4xl h-full mx-auto mt-9 mb-12 px-4 sm:px-10">
           <div className="md:w-3/4 mx-auto">
-            <button onClick={() => handleStep('next')}>next</button>
-            <button onClick={() => handleStep('previous')}>previous</button>
             <FormSteps
               steps={steps}
               setCurrentStep={setCurrentStep}
