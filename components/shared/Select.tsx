@@ -1,56 +1,65 @@
-import { Fragment, HTMLProps, useState } from 'react';
+import { Fragment, HTMLProps, useEffect, useState } from 'react';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
+import { useFormContext } from 'react-hook-form';
 
 interface SelectProps extends HTMLProps<HTMLDivElement> {
   label: string;
-  placeholder: string;
   name: string;
   options: {
     name: string;
-    value: string | number;
+    value: string | number | null;
   }[];
 }
 
 // TODO:
-const Select: React.FC<SelectProps> = ({
-  label,
-  name,
-  placeholder,
-  options,
-  ...rest
-}) => {
+const Select: React.FC<SelectProps> = ({ label, name, options, ...rest }) => {
   const [selected, setSelected] = useState(options[0]);
-  const [isError, setIsError] = useState(true);
+
+  const {
+    setValue,
+    formState: { errors },
+    trigger,
+  } = useFormContext();
+
+  const handleChange = (e: { name: string; value: string | number | null }) => {
+    setValue(name, e.value);
+    trigger(name);
+    setSelected(e);
+  };
 
   return (
     <div {...rest}>
-      <button onClick={() => setIsError(!isError)}>asd</button>
-
       <label
-        // htmlFor={name}
+        htmlFor={name}
         className="block text-sm font-proxiSemiBold text-gray-600"
       >
         {label}
       </label>
 
-      <Listbox value={selected} onChange={setSelected}>
+      <Listbox value={selected} onChange={handleChange}>
         <div className="relative mt-1">
           <Listbox.Button
-            className={`relative w-full py-2 pl-3 pr-10 text-left bg-white border transition-all rounded-lg shadow-sm cursor-default sm:text-sm ${
-              isError ? 'border-red-500' : 'border-gray-300'
+            className={`relative w-full py-2 pl-3 pr-10 text-left bg-white border transition-all rounded-lg focus:shadow-sm cursor-default sm:text-sm ${
+              errors[name] ? 'border-red-500' : 'border-gray-300'
             }`}
           >
             <span
               className={`block truncate transition-all ${
-                isError ? 'text-red-600' : 'text-gray-900'
+                errors[name]
+                  ? 'text-red-600'
+                  : selected.value || selected.value === 0
+                  ? 'text-gray-700'
+                  : 'text-gray-400'
               }`}
             >
               {selected.name}
             </span>
             <span className="absolute inset-y-0 right-0 flex items-center pr-2 pointer-events-none">
               <SelectorIcon
-                className="w-5 h-5 text-gray-400"
+                className={`w-5 h-5 ${
+                  errors[name] ? 'text-red-500' : 'text-gray-400'
+                }`}
                 aria-hidden="true"
               />
             </span>
@@ -105,9 +114,9 @@ const Select: React.FC<SelectProps> = ({
         </div>
       </Listbox>
 
-      {isError && (
-        <p className="mt-2 text-xs text-red-600" id="email-error">
-          Your password must be less than 4 characters.
+      {errors[name] && (
+        <p className="mt-2 text-sm text-red-600" id="email-error">
+          {errors[name].message}
         </p>
       )}
     </div>
