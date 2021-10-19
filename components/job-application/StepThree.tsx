@@ -5,7 +5,7 @@ import {
   ILegalStatusForm,
   LegalStatusFormSchema,
 } from '../../utils/ApplcationFormResolver';
-import Checkbox from '../shared/checkbox';
+import Checkbox from '../shared/Checkbox';
 import Input from '../shared/Input';
 import Radio from '../shared/Radio';
 
